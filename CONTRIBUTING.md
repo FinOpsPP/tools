@@ -1,4 +1,4 @@
-# Contributing to the FinOps++ Framework Assessment
+# Contributing to the FinOps++ CLI
 
 To start off, we wanted to say welcome! We are more than happy that you took the time to come over to this CONTRIBUTING.md document to see how you can start adding to the FinOps++ Framework-Assessment project. We accept contributions from all, but we do have specific ways of doing things that we ask you to follow. We will try and outline those procedures below to the best of our abilities. But if you have any additional questions on things, please feel free to reach out to maintainers via Email, or in an [Issue](#have-a-suggestion-found-an-issue) in for this repository.
 
@@ -9,7 +9,7 @@ To start off, we wanted to say welcome! We are more than happy that you took the
 
 For bugs, an attempt will be made to reproduce the bug. The only expectation we have for you in this process is to be open to try out some things (such as additional commands) to help us gather more information to diagnose the problem.
 
-Your GitHub issue (regardless of type) will be reviewed, and discussed as a community with the issue author. Confirmed/accepted issues will be added to the next feasible release milestone. At this point, cheers! You are official already a contributor to the Framework-Assessment project. If you desire though, feel free now to consider [Submitting a specification change](#submitting-specification-changes) or [Submitting a tools change](#submitting-tools-changes)
+Your GitHub issue (regardless of type) will be reviewed, and discussed as a community with the issue author. Confirmed/accepted issues will be added to the next feasible release milestone. At this point, cheers! You are official already a contributor to the Framework-Assessment project. If you desire though, feel free now to consider [Submitting a tools change](#submitting-tools-changes)
 
 ## Pull/Change Request
 
@@ -22,23 +22,6 @@ Once all your changes are ready, you can submit a PR request using the provided 
 
 > [!NOTE]
 > If you would like to open up a PR before it is ready, you may do this. But make sure to open it in [draft mode](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request). A PR will not be reviewed until it is ready.
-
-### Submitting specification changes
-
-The Framework-Assessment project uses an [As-Code](https://arxiv.org/pdf/2507.05100), with the Components and Frameworks markdown files, as well as the Assessments excel being generated from yaml [specifications](/specifications). For you, this mean that most of the changes you might want to make to the Components, Frameworks, or Assessments should start with changes to those specifications. Things that would necessitate a yaml specification change could include
-
-* "Patching" a typo found in the markdown or excel files.
-* Adding a new Note or Reference for an existing Action.
-* Creating a completely new instance of a Component, such as an Action, Capability, or Domain
-* Adding a new scope definition to an existing Profile.
-* Creating a completely new a community Framework Profile.
-* Removing any complete Component or Framework Profile
-
-Once you have updated your specification(s), this is the minimum we require for a change to be submitted for consideration.
-
-But, if your want or would like to go one step further, you can consider using the commands from the [finopspp cli](/tools/README.md#cli-tool) to [generate](/tools/README.md#generating-commands) updates to the Components and Frameworks. If not, that is fine too. At some point soon after merging, these command will be run by the maintainers before the next release to make sure your changes are represented in the next milestone release.
-
-Alternatively, if you don't want to deal with python (completely understandable), you can add our `Generate Components` [GitHub label](https://www.geeksforgeeks.org/git/what-is-github-labels/) to trigger our `Generate` [Github Action](https://github.com/features/actions) for your PR. This will at least auto-generate your components for you. Any generated component markdown files are then directly committed back to your PR by the action. Sometimes, the maintainers may also add this label on your behalf.
 
 ### Submitting tools changes
 

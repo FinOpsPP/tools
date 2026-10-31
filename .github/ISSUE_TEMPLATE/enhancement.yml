@@ -9,8 +9,6 @@ body:
     attributes:
       label: What aspect of the Framework-Assessment would you like to enhance?
       options:
-        - label: "specification"
-        - label: "assessment"
         - label: "tool"
         - label: "documentation"
         - label: "other"

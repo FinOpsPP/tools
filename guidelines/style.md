@@ -6,38 +6,9 @@ To help with this, when designing the structure of the Assessments project, we l
 
 ## Linting
 
-It is strongly recommended to use [pylint](https://www.pylint.org/) for linting for python code. While [yamllint](https://yamllint.readthedocs.io/en/stable/) is recommended for the YAML components specifications. And [pymarkdownlnt](https://pymarkdown.readthedocs.io/en/latest/) (also called `pymarkdown` for short) can be used to spot check the Markdown documentation.
+It is strongly recommended to use [pylint](https://www.pylint.org/) for linting for python code.
 
-There are built-in configuration files for these in the top-level directory of this project that will help make sure your code is compliant with the project's standards. These packages can be pretty easily installed in [CLI Tool](/tools/README.md) with the following modification to the pip install command `python -m pip install -e ".[validation]"`.
-
-> [!CAUTION]
-> There is an older and unaffiliated (and unmaintained) package called `pymarkdown`. For security reasons, make sure to not download this version by installing specifically `pymarkdownlnt` if you choose to install the dependencies separately into your environment.
-
-### CSpell (optional)
-
-One other Linter that we run against your code on pull-requests is [cspell](https://cspell.org/). This is actually a [Node.js](https://nodejs.org/en) based CLI tool that provides a basic means to spell check the project. As configured in [.cspell.config.yaml](/.cspell.config.yaml), this is used as a glorified typo finder. So, between this and the fact that CSpell doesn't use Python, we won't require users to download an run this. But any failures found during the analysis of the pull request will need to be fixed.
-
-> [!TIP]
-> For those that do want to go above and beyond, feel free to follow along with the [CSpell Installation](https://cspell.org/docs/installation) instructions from cspell to get the tool up-and-running.
-
-### Dictionaries
-
-CSpell makes use of a number of [default dictionaries](https://cspell.org/docs/dictionaries) for sourcing words. Largely these are based on common tech industry terms, but can run behind words used in FinOps. It is suggested, if you find a FinOps word that does not exist, or you think might not exist, to just add it to the `words` section of the [.cspell.config.yaml](/.cspell.config.yaml)
-
-> [!IMPORTANT]
-> While CSpell does have a default dictionary for both US and Great Britian spelling, it seems to favor the US version for word spelling. To help avoid random issues with this, it is suggested that you favor the US spelling of words as well.
-
-## YAML
-
-This project makes use of the [YAML specification v1.2.2](https://yaml.org/spec/1.2.2/) for all files with the `.yaml` extension. That largely includes the `action`, `capability`, `domain`, and `profile` component specifications that are used generate other core pieces of FinOps++ such as the Markdown components.
-
-Differences from the standard specification used for FinOps++ can be found in the `yamllint` configuration file [.yamllint](/.yamllint). The biggest change being that FinOps++ makes uses of 2 spaces for indentation rather than 4. This was chosen on purpose to help readability when it comes to nesting used by the component specifications.
-
-## Markdown
-
-Largely, this project work around the [GitHub Flavored Markdown](https://github.github.com/gfm/), but should generally also work well with the [CommonMark](https://commonmark.org/). Files that are governed by these specifications largely have the `.md` extension, there there are some exceptions such as the files found under [guidelines/](/guidelines/) or the project's base [README.md](/README.md).
-
-Even when these specifications are enforce, there are some difference related to handling of HTML elements when creating nested tables for the framework markdowns. Additionally, we also along line-lengths of 120 characters rather than the typical length of 80. But generally we try to keep as close as possible to these specifications. These (hopefully) minimal changes can be found in the `pymarkdownlnt` configuration file [.pymarkdown](/.pymarkdown).
+There are built-in configuration files for these in the top-level directory of this project that will help make sure your code is compliant with the project's standards. These packages can be pretty easily installed in [CLI Tool](/src/README.md) with the following modification to the pip install command `python -m pip install -e ".[validation]"`.
 
 ## Python
 
