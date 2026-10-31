@@ -69,11 +69,11 @@ Another really useful command is `update`, which can be called with the followin
 finopspp specifications update --specification-type=<desired-spec-type> <spec-id-or-all>
 ```
 
-Giving a specification type, and corresponding changes to the specification type's [model definitions](/tools/models/definitions.py), you can update that specification type's files by ID or all at once to match the new definition. Some updates work out-of-the-box, like adding/removing fields. While other more complex updates, such as renaming a field or changing the order of fields in the schema, are allowed by creating custom alias for fields or by using Pydantic [model_serializer](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.model_serializer).
+Giving a specification type, and corresponding changes to the specification type's [model definitions](/src/models/definitions.py), you can update that specification type's files by ID or all at once to match the new definition. Some updates work out-of-the-box, like adding/removing fields. While other more complex updates, such as renaming a field or changing the order of fields in the schema, are allowed by creating custom alias for fields or by using Pydantic [model_serializer](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.model_serializer).
 
 ### New
 
-The `new` command will allow you to create new specification files from smart defaults, which can be found, in code, under [models/defaults.py](/tools/models/defaults.py). The new specification file, created for a desired specification type, can be used as template to fill-in until the specification is in a state that is ready to be publish.
+The `new` command will allow you to create new specification files from smart defaults, which can be found, in code, under [models/defaults.py](/src/models/defaults.py). The new specification file, created for a desired specification type, can be used as template to fill-in until the specification is in a state that is ready to be publish.
 
 The command to create these new specification is simply
 

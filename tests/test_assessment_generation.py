@@ -31,7 +31,7 @@ def test_normalize():
     )
     assert domains
 
-    data_path = os.path.join(os.getcwd(), 'tools/tests/data/expected_example_domains.json')
+    data_path = os.path.join(os.getcwd(), 'tests/data/expected_example_domains.json')
     with open(data_path, mode='r', encoding='utf-8') as in_file:
         expected_domains = json.load(in_file)
 
@@ -41,7 +41,7 @@ def test_normalize():
     normalized_domains = normalize(domains)
     assert normalized_domains is not None
 
-    data_path = os.path.join(os.getcwd(), 'tools/tests/data/expected_example_dataframe.json')
+    data_path = os.path.join(os.getcwd(), 'tests/data/expected_example_dataframe.json')
     with open(data_path, mode='r', encoding='utf-8') as in_file:
         expected_dataframe = json.load(in_file)
 
