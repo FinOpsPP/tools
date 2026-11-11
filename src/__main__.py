@@ -1,7 +1,6 @@
 """primary code for the finopspp CLI"""
 import os
 import sys
-import tomllib
 from importlib import util
 
 import click
@@ -31,46 +30,8 @@ def cli(ctx):
     if 'init' in ctx.invoked_subcommand:
         return
 
-    with open(config_path, 'rb') as toml_file:
-        config = tomllib.load(toml_file)
-
-    framework = config.get('framework')
-    if not config.get('framework'):
-        click.secho(
-            f'Missing `framework` section in {config_path}. Exiting!',
-            err=True,
-            fg='red'
-        )
-        sys.exit(1)
-
-    project_path = framework.get('project_path')
-    if not project_path and not os.path.exists(project_path):
-        click.secho(
-            f'''Configuration requires a valid `project_path` field.
-
-            Either the field was not included, or the path could not be found
-            on your filesystem. Please check {config_path} to double check this
-            field
-            ''',
-            err=True,
-            fg='red'
-        )
-        sys.exit(1)
-
-    sys.path.insert(0, project_path)
-
-    if any([
-        util.find_spec('specifications.actions') is None,
-        util.find_spec('specifications.capabilities') is None,
-        util.find_spec('specifications.domains') is None,
-        util.find_spec('specifications.variables') is None
-    ]):
-        click.secho(
-            'Your specifications directory appears to be missing one or more needed subdirectories. Exiting!',
-            err=True,
-            fg='red'
-        )
-        sys.exit(1)
+    # load up the config based on the path. This command can exit if an invalid config is found
+    utils.load_config(config_path)
 
     # configure profiles and variables from what are found
     utils.profiles()

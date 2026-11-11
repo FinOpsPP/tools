@@ -8,14 +8,13 @@ import click
 from jinja2 import Environment, PackageLoader
 from pydantic import ValidationError
 
-from finopspp.commands import utils
 from finopspp.models.tool_configuration import Configuration
 
 Templates = PackageLoader('finopspp', 'templates')
 
 @click.command()
 @click.option(
-    '--project_path',
+    '--project-path',
     default='.',
     type=click.Path(resolve_path=True, path_type=Path),
     help='The location on your filesystem the configuration is written to. Defaults to current working directory'
@@ -36,10 +35,12 @@ def init(project_path):
     )
 
     home_directory = os.path.expanduser('~')
-    config_path = os.path.join(home_directory, '.finopspp', 'config.toml')
+    config_dir = os.path.join(home_directory, '.finopspp')
+    Path(config_dir).mkdir(parents=True, exist_ok=True)
 
     # finally, write README.md for the schemas
     # from the rendered output
+    config_path = os.path.join(config_dir, 'config.toml')
     with open(config_path, 'w', encoding='utf-8') as outfile:
         outfile.write(output)
 

@@ -14,13 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v7
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install lint and validation dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -e ".[validation]"
-    - name: Analyze & lint tools directory with pylint
+    - name: Analyze & lint src directory with pylint
       run: |
-        pylint tools
+        pylint src

@@ -3,7 +3,7 @@ name: Testing
 on:
   pull_request:
     paths:
-      - 'tools/**'
+      - 'src/**'
 
 permissions:
   contents: read
@@ -17,13 +17,18 @@ jobs:
     steps:
     - uses: actions/checkout@v7
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install Packages
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh repo clone FinOpsPP/Framework-Assessment
     - name: Install testing dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -e ".[testing]"
+        finopspp init --project-path ./Framework-Assessment
     - name: Run unit tests for the finopspp tool
       run: |
-        pytest tools
+        pytest tests/
