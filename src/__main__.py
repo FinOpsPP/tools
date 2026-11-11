@@ -7,6 +7,7 @@ from importlib import util
 import click
 
 from finopspp.commands import utils
+from finopspp.commands.init import group as init_group
 from finopspp.commands.info import group as info_group
 from finopspp.commands.generate import group as generate_group
 from finopspp.commands.specifications import group as specifications_group
@@ -20,13 +21,15 @@ def cli(ctx):
     """FinOps++ administration tool"""
     home_directory = os.path.expanduser('~')
     config_path = os.path.join(home_directory, '.finopspp', 'config.toml')
-    if not os.path.exists(config_path) and ctx.invoked_subcommand != 'init':
+    if not os.path.exists(config_path) and 'init' not in ctx.invoked_subcommand:
         click.secho(
             'Tool configuration does not exist. Please run `finopspp init`',
             err=True,
             fg='red'
         )
         sys.exit(1)
+    if 'init' in ctx.invoked_subcommand:
+        return
 
     with open(config_path, 'rb') as toml_file:
         config = tomllib.load(toml_file)
@@ -73,7 +76,8 @@ def cli(ctx):
     utils.profiles()
     utils.variables()
 
-
+cli.add_command(init_group.init)
+cli.add_command(init_group.validate, name='init-validate')
 cli.add_command(info_group.info)
 cli.add_command(generate_group.generate)
 cli.add_command(specifications_group.specifications)
