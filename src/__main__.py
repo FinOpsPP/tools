@@ -1,7 +1,6 @@
 """primary code for the finopspp CLI"""
 import os
 import sys
-from importlib import util
 
 import click
 
