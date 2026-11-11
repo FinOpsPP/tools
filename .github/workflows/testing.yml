@@ -3,7 +3,7 @@ name: Testing
 on:
   pull_request:
     paths:
-      - 'tools/**'
+      - 'src/**'
 
 permissions:
   contents: read
