@@ -30,6 +30,25 @@ def str_presenter(dumper, data):
 yaml.add_representer(str, str_presenter)
 
 
+class DynamicChoice(click.ParamType):
+    """A DynamicChoice class that enables updating choices passed in"""
+    name = "choice"
+
+    def __init__(self, choices):
+        # Fix the choices, don't copy them over
+        # so that the options can use these at runtime
+        self.choices = choices
+
+    def get_metavar(self, param, ctx=None): # pylint: disable=unused-argument
+        return '[' + '|'.join(self.choices) + ']'
+
+    def convert(self, value, param, ctx):
+        if value in self.choices:
+            return value
+
+        self.fail(f'{value} is not one of {self.choices}', param, ctx)
+
+
 def patched_show(self, file=None): # pylint: disable=unused-argument
     """Patched version of UsageError Show
     
@@ -70,14 +89,11 @@ def patched_show(self, file=None): # pylint: disable=unused-argument
 
 click.UsageError.show = patched_show
 
-
+ProfilesKeys = []
 ProfilesMap = {}
 def profiles(testing=False):
-    """Return all profiles. Including proposed one"""
-    if ProfilesMap:
-        return ProfilesMap
-
-    profile_specs = files('finopspp.specifications.profiles')
+    """Setup ProfilesMap for all profiles. Including proposed one"""
+    profile_specs = files('specifications.profiles')
     for file in profile_specs.iterdir():
         # only include yaml files
         if not file.name.endswith('.yaml'):
@@ -91,18 +107,15 @@ def profiles(testing=False):
             if not title or (not testing and title == 'Example Profile'):
                 continue
 
+            ProfilesKeys.append(title)
             ProfilesMap[title] = path
 
-    return ProfilesMap
 
-
+VariablesKeys = []
 VariablesMap = {}
 def variables():
-    """Return all fppvars names and paths"""
-    if VariablesMap:
-        return VariablesMap
-
-    variable_specs = files('finopspp.specifications.variables')
+    """Setup VariablesMaps for all fppvars names and paths"""
+    variable_specs = files('specifications.variables')
     for file in variable_specs.iterdir():
         # only include fppvars toml files
         if not file.name.endswith('fppvars.toml'):
@@ -115,9 +128,8 @@ def variables():
             if not name:
                 continue
 
+            VariablesKeys.append(name)
             VariablesMap[name] = path
-
-    return VariablesMap
 
 
 SpecSubspecMap = {

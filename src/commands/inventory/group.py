@@ -28,7 +28,7 @@ def inventory():
 @click.option(
     '--profile',
     default='FinOps++',
-    type=click.Choice(list(utils.profiles().keys())),
+    type=utils.DynamicChoice(utils.ProfilesKeys),
     help='Which assessment profile to list. Takes preference over specification type'
 )
 def list_inventory(show_action_status, status_by, profile):
@@ -45,9 +45,9 @@ def list_inventory(show_action_status, status_by, profile):
         ).get('Specification')
         profile_id = spec.get('ID')
 
-    domain_files = files('finopspp.specifications.domains')
-    capability_files = files('finopspp.specifications.capabilities')
-    action_files = files('finopspp.specifications.actions')
+    domain_files = files('specifications.domains')
+    capability_files = files('specifications.capabilities')
+    action_files = files('specifications.actions')
 
     allowed_statuses = [
         StatusEnum.accepted.value,

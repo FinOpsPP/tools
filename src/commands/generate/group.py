@@ -22,7 +22,7 @@ def generate():
 @click.option(
     '--profile',
     default='FinOps++',
-    type=click.Choice(list(utils.profiles().keys())),
+    type=utils.DynamicChoice(utils.ProfilesKeys),
     help='Which assessment profile to generate. Defaults to "FinOps++"',
 )
 @click.option(
@@ -39,7 +39,7 @@ def generate():
 )
 @click.option(
     '--variables',
-    type=click.Choice(list(utils.variables().keys())),
+    type=utils.DynamicChoice(utils.VariablesKeys),
     help='Optional variables file to overright default assessment settings for a given profile'
 )
 def assessment(profile, proposed, deprecated, variables):
@@ -153,14 +153,14 @@ def components(selection, specification_type):
 
     NOTE: If you are using "diff" as the option, you must have git installed.
     """
-    specs_files = files(f'finopspp.specifications.{specification_type}')
+    specs_files = files(f'specifications.{specification_type}')
 
     # get subspec to help fill in names and other important pieces of
     # information from the sub specification.
     subspec_type = utils.SpecSubspecMap[specification_type]
     subspec_files = None
     if subspec_type:
-        subspec_files = files(f'finopspp.specifications.{subspec_type}')
+        subspec_files = files(f'specifications.{subspec_type}')
 
     # iterate over the specification files and generate markdown files
     for spec in utils.all_diff_id_helper(selection, specs_files, specification_type):

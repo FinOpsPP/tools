@@ -236,9 +236,9 @@ def specification_collector(profile, profile_spec, allowed_statuses, variables):
     When testing, this will most likely show in your terminal, but can be safely
     ignored.
     """
-    domain_files = files('finopspp.specifications.domains')
-    capability_files = files('finopspp.specifications.capabilities')
-    action_files = files('finopspp.specifications.actions')
+    domain_files = files('specifications.domains')
+    capability_files = files('specifications.capabilities')
+    action_files = files('specifications.actions')
 
     weights = variables.get('weights', {})
 

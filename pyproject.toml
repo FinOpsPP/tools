@@ -43,6 +43,3 @@ packages = ["finopspp"]
 "finopspp.commands" = "src/commands"
 "finopspp.models" = "src/models"
 "finopspp.templates" = "src/templates"
-
-[tool.setuptools.package-data]
-"finopspp.specifications" = ["*.yaml"]

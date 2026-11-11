@@ -50,7 +50,7 @@ def approval(approvers, number, today, specs):
 def approval_options(specification_type):
     """Helper to pull information on what should should be approved"""
     spec_options = {}
-    specs = files(f'finopspp.specifications.{specification_type}')
+    specs = files(f'specifications.{specification_type}')
     for spec in specs.iterdir():
         number, _ = os.path.splitext(spec.name)
 

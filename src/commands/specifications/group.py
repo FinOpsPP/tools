@@ -48,7 +48,7 @@ def new(id_, specification_type):
     spec_id = str(id_)
     file = '0'*(3-len(spec_id)) + spec_id
     path = files(
-        f'finopspp.specifications.{specification_type}'
+        f'specifications.{specification_type}'
     ).joinpath(f'{file}.yaml')
     click.echo(f'Attempting to create "{path}" for specification-type={specification_type}:')
 
@@ -97,7 +97,7 @@ def list_specifications(specification_type):
     """
     click.echo(f'Specifications IDs for specification-type={specification_type}:')
     spec_files = files(
-        f'finopspp.specifications.{specification_type}'
+        f'specifications.{specification_type}'
     )
     for file in spec_files.iterdir():
         # only include yaml files
@@ -148,7 +148,7 @@ def show(id_, metadata, specification_type, no_numbers):
     spec_id = str(id_)
     file = '0'*(3-len(spec_id)) + spec_id
     path = files(
-        f'finopspp.specifications.{specification_type}'
+        f'specifications.{specification_type}'
     ).joinpath(f'{file}.yaml')
 
     if not os.path.exists(path):
@@ -252,7 +252,7 @@ def validate(selection, specification_type):
         case 'profiles':
             model = Profile
 
-    specs_files = files(f'finopspp.specifications.{specification_type}')
+    specs_files = files(f'specifications.{specification_type}')
 
     failed = False
     for spec in utils.all_diff_id_helper(selection, specs_files, specification_type):
@@ -343,7 +343,7 @@ def update(selection, specification_type, major, force):
         case 'profiles':
             model = Profile
 
-    specs_files = files(f'finopspp.specifications.{specification_type}')
+    specs_files = files(f'specifications.{specification_type}')
 
     failed = False
     for spec in utils.all_diff_id_helper(selection, specs_files):
@@ -477,22 +477,22 @@ def approvals():
     today = str(datetime.date.today())
 
     # do approvals for profiles first
-    specs = files('finopspp.specifications.profiles')
+    specs = files('specifications.profiles')
     for number in approval_map['profiles']:
         helpers.approval(approvers, number, today, specs)
 
     # next do domains
-    specs = files('finopspp.specifications.domains')
+    specs = files('specifications.domains')
     for number in approval_map['domains']:
         helpers.approval(approvers, number, today, specs)
 
     # next do capabilities
-    specs = files('finopspp.specifications.capabilities')
+    specs = files('specifications.capabilities')
     for number in approval_map['capabilities']:
         helpers.approval(approvers, number, today, specs)
 
     # finally do actions
-    specs = files('finopspp.specifications.actions')
+    specs = files('specifications.actions')
     for number in approval_map['actions']:
         helpers.approval(approvers, number, today, specs)
 

@@ -167,7 +167,7 @@ def process_row_local(row, specification_files, today):
 def main(local=False):
     """Main function"""
     today = str(datetime.date.today())
-    specification_files = files('finopspp.specifications.actions')
+    specification_files = files('specifications.actions')
 
     # pull data based on if we are pulling data from gsheet or locally
     # and configure how that will be processed
