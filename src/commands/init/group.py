@@ -14,7 +14,7 @@ Templates = PackageLoader('finopspp', 'templates')
 
 @click.command()
 @click.option(
-    '--project_path',
+    '--project-path',
     default='.',
     type=click.Path(resolve_path=True, path_type=Path),
     help='The location on your filesystem the configuration is written to. Defaults to current working directory'
