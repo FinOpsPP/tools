@@ -40,7 +40,7 @@ def init(project_path):
 
     # finally, write README.md for the schemas
     # from the rendered output
-    config_path = os.path.join(config_dir, , 'config.toml')
+    config_path = os.path.join(config_dir, 'config.toml')
     with open(config_path, 'w', encoding='utf-8') as outfile:
         outfile.write(output)
 
