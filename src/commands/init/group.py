@@ -8,7 +8,6 @@ import click
 from jinja2 import Environment, PackageLoader
 from pydantic import ValidationError
 
-from finopspp.commands import utils
 from finopspp.models.tool_configuration import Configuration
 
 Templates = PackageLoader('finopspp', 'templates')
