@@ -1,7 +1,6 @@
 """primary code for the finopspp CLI"""
 import os
 import sys
-import tomllib
 from importlib import util
 
 import click
@@ -31,6 +30,7 @@ def cli(ctx):
     if 'init' in ctx.invoked_subcommand:
         return
 
+    # load up the config based on the path. This command can exit if an invalid config is found
     utils.load_config(config_path)
 
     # configure profiles and variables from what are found
