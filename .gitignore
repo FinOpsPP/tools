@@ -2,6 +2,7 @@
 .vscode
 .DS_Store
 .venv/
+dist/
 
 # output extensions to ignore
 *.ods
