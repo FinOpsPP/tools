@@ -35,11 +35,17 @@ testing = [
 [project.scripts]
 finopspp = "finopspp.__main__:cli"
 
-[tool.setuptools.packages.find]
-where = ["finopspp"]
-exclude = ["scratch"]
-namespaces = false
-
-[tool.setuptools.package-data]
-"finopspp.templates" = ["*.j2"]
-
+[tool.setuptools]
+packages = [
+    "finopspp",
+    "finopspp.commands",
+    "finopspp.commands.generate",
+    "finopspp.commands.generate.composers",
+    "finopspp.commands.info",
+    "finopspp.commands.init",
+    "finopspp.commands.inventory",
+    "finopspp.commands.specifications",
+    "finopspp.commands.variables",
+    "finopspp.models",
+    "finopspp.templates"
+]
