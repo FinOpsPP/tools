@@ -91,7 +91,7 @@ def patched_show(self, file=None): # pylint: disable=unused-argument
 click.UsageError.show = patched_show
 
 
-def load_config(config_path):
+def load_config(ctx, config_path):
     """Helper to load up the finopspp config safely"""
     with open(config_path, 'rb') as toml_file:
         config = tomllib.load(toml_file)
@@ -120,6 +120,7 @@ def load_config(config_path):
         sys.exit(1)
 
     sys.path.insert(0, project_path)
+    ctx.obj['PROJECT_PATH'] = project_path
 
     if any([
         util.find_spec('specifications.actions') is None,

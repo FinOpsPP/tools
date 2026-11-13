@@ -105,7 +105,7 @@ def variables_collector(profile, variables):
         )
         return {}
 
-    return variables.dict()
+    return variables.model_dump()
 
 
 def domain_collector(profile, domain, domain_files, allowed_statuses):

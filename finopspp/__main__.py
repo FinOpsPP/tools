@@ -17,6 +17,8 @@ from finopspp.commands.variables import group as variables_group
 @click.pass_context
 def cli(ctx):
     """FinOps++ administration tool"""
+    ctx.obj = {}
+
     home_directory = os.path.expanduser('~')
     config_path = os.path.join(home_directory, '.finopspp', 'config.toml')
     if not os.path.exists(config_path) and 'init' not in ctx.invoked_subcommand:
@@ -30,7 +32,7 @@ def cli(ctx):
         return
 
     # load up the config based on the path. This command can exit if an invalid config is found
-    utils.load_config(config_path)
+    utils.load_config(ctx, config_path)
 
     # configure profiles and variables from what are found
     utils.profiles()
