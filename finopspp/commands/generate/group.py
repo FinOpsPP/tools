@@ -42,7 +42,8 @@ def generate():
     type=utils.DynamicChoice(utils.VariablesKeys),
     help='Optional variables file to overright default assessment settings for a given profile'
 )
-def assessment(profile, proposed, deprecated, variables):
+@click.pass_context
+def assessment(ctx, profile, proposed, deprecated, variables):
     """Generate assessment files from their specifications
     
     By default, this will generate an assessment and its' corresponding files
@@ -104,7 +105,7 @@ def assessment(profile, proposed, deprecated, variables):
     # check if assessment directory exists for this profile
     # and if it does not create it
     base_path = os.path.join(
-        os.getcwd(),
+        ctx.obj['PROJECT_PATH'],
         'assessments',
         profile
     )
@@ -124,7 +125,8 @@ def assessment(profile, proposed, deprecated, variables):
 
 
 @generate.command()
-def documents():
+@click.pass_context
+def documents(ctx):
     """Generate schema documents markdown files from code"""
     schemas = {}
     for definition in [Action, Capability, Domain, Profile]:
@@ -136,7 +138,7 @@ def documents():
             width=120 # will always be longer that what is allowed by yamllint
         )
 
-    markdown.schemas_generate(schemas)
+    markdown.schemas_generate(ctx, schemas)
 
 
 
@@ -148,7 +150,8 @@ def documents():
     help='Which specification type to generate. Defaults to "profiles"'
 )
 @click.argument('selection', type=utils.AllDiffOrIntRangeParamType())
-def components(selection, specification_type):
+@click.pass_context
+def components(ctx, selection, specification_type):
     """Generate component markdown files from their specifications
 
     NOTE: If you are using "diff" as the option, you must have git installed.
@@ -187,4 +190,4 @@ def components(selection, specification_type):
             subspec['file'] = f'/components/{subspec_type}/{"0"*(3-len(subspec_id))}{subspec_id}.md'
             subspec['title'] = subspec_doc.get('Title')
 
-        markdown.components_generate(specification_type, spec)
+        markdown.components_generate(ctx, specification_type, spec)

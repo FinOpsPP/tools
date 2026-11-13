@@ -46,7 +46,7 @@ def assessment_generate(profile, profile_spec, base_path, specification, suffix)
     click.secho(f'Attempt to generate framework markdown "{out_path}" succeeded', fg='green')
 
 
-def components_generate(specification_type, spec):
+def components_generate(ctx, specification_type, spec):
     """Generate Components markdown files"""
     # write out rendered output to file
     # make sure serialized ID is the same as the one
@@ -54,7 +54,7 @@ def components_generate(specification_type, spec):
     spec_id = str(spec['ID'])
     file_prefix = '0'*(3-len(spec_id)) + spec_id
     out_path = os.path.join(
-        os.getcwd(),
+        ctx.obj['PROJECT_PATH'],
         'components',
         specification_type,
         f'{file_prefix}.md'
@@ -78,10 +78,10 @@ def components_generate(specification_type, spec):
     click.secho(f'Attempt to generate "{out_path}" succeeded', fg='green')
 
 
-def schemas_generate(schemas):
+def schemas_generate(ctx, schemas):
     """Generate Document markdown files"""
     out_path = os.path.join(
-        os.getcwd(),
+        ctx.obj['PROJECT_PATH'],
         'specifications',
         'README.md'
     )
