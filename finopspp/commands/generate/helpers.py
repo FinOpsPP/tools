@@ -85,7 +85,7 @@ def variables_collector(profile, variables):
     """Collect variables name for a profile"""
     # look up variable path, and if none if found
     # return early
-    path = utils.variables().get(variables)
+    path = utils.VariablesMap.get(variables)
     if not path:
         return {}
 
